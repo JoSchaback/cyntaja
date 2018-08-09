@@ -1,17 +1,13 @@
 package de.schabby.cyntaja;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
-import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.*;
 
 /**
  * Central data structure (root) to hold the C syntax tree from which we later generate the target C file.
  */
-public class Index {
+public class Program {
 
     /**
      * The structs of the code, the name is prefixed by the package of the Jalda class.
@@ -81,16 +77,24 @@ public class Index {
         functions.put(func.getName(), func);
     }
 
+    /**
+     * Writes this Program to a C source file.
+     *
+     * @param filename filename to source file
+     */
     public void writeToFile(String filename) {
         try {
             PrintWriter pw = new PrintWriter(filename);
 
+            // write include statements at beginning of file
             includes.forEach( i -> i.toC(pw) );
 
+            // write function declarations
             functions.values().stream()
                     .filter( Function::isRequiresDeclaration )
                     .forEach( f -> f.generateDeclaration(pw));
 
+            // write function definitions
             functions.values().forEach( f -> f.generateBody(pw) );
 
             pw.close();

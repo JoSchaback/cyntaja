@@ -1,7 +1,5 @@
 package de.schabby.cyntaja.tools;
 
-import de.schabby.cyntaja.Index;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

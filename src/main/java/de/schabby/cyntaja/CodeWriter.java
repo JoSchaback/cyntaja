@@ -10,10 +10,10 @@ import java.io.PrintWriter;
  */
 public class CodeWriter
 {
-    private Index index;
+    private Program index;
     private static final Logger log = LoggerFactory.getLogger(CodeWriter.class);
 
-    public CodeWriter(Index index)
+    public CodeWriter(Program index)
     {
         this.index = index;
     }

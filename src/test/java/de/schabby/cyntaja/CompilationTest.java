@@ -6,7 +6,7 @@ public class CompilationTest {
 
     public static void main(String[] args)
     {
-        Index index = new Index();
+        Program program = new Program();
 
         Type integer    = new Type("int", false, true, false);
         Type voidStruct = new Type("void", false, true, false);
@@ -22,14 +22,14 @@ public class CompilationTest {
         main.getBlock().add(call);
         main.getBlock().add(ret);
 
-        index.add(Include.STDIO);
-        index.add(main);
+        program.add(Include.STDIO);
+        program.add(main);
 
-        String pathToGCC="C:\\Users\\johan\\Downloads\\codeblocks-17.12mingw-nosetup\\MinGW\\bin\\gcc.exe";
+        String pathToGCC="C:\\MinGW\\bin\\gcc.exe";
         String sourceFile = "C:\\Users\\johan\\git\\cyntaja\\target\\main.c";
         String targetFile = "C:\\Users\\johan\\git\\cyntaja\\target\\main.exe";
 
-        index.writeToFile( sourceFile );
+        program.writeToFile( sourceFile );
 
         int result = CompileExecutor.compile(pathToGCC, sourceFile, targetFile);
     }
