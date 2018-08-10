@@ -2,13 +2,13 @@ package de.schabby.cyntaja;
 
 import java.io.PrintWriter;
 
-public class BinaryArithmeticOperator implements Expression {
+public class BinaryOperator implements Expression {
 
     public final String operator;
     private Expression left;
     private Expression right;
 
-    public BinaryArithmeticOperator(String operator, Expression left, Expression right) {
+    public BinaryOperator(String operator, Expression left, Expression right) {
         this.operator = operator;
         this.left = left;
         this.right = right;

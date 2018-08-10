@@ -8,7 +8,7 @@ public class Field {
     public Field(Variable variable, Expression initExp) {
         this.variable = variable;
         this.initExp = initExp;
-        this.variable.setClassField(true);
+        //this.variable.setClassField(true);
     }
 
     public Field(Variable variable)

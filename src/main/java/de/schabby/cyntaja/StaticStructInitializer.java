@@ -19,9 +19,9 @@ public class StaticStructInitializer implements Expression {
         pw.print("{");
         for( int i = 0; i < struct.fields.size(); i++ ) {
             Field field = struct.fields.get(i);
-            pw.print("."+field.getVariable().name+"=");
+            pw.print("."+field.getVariable().identifier+"=");
             Expression exp = mapping.get(field); // TODO we could check here that it is a literal, otherwise the C compiler would not compile it
-            if( exp == null ) throw new RuntimeException("could not find mapping for field '"+field.getVariable().name+"', but all fields need to be mapped onto a literal expression");
+            if( exp == null ) throw new RuntimeException("could not find mapping for field '"+field.getVariable().identifier+"', but all fields need to be mapped onto a literal expression");
             exp.toC(pw);
             if( i+1 < struct.fields.size() )
                 pw.print(", ");

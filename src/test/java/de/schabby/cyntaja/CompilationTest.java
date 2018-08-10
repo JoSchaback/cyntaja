@@ -6,10 +6,7 @@ public class CompilationTest {
 
     public static void main(String[] args)
     {
-        Program program = new Program();
-
-        Type integer    = new Type("int", false, true, false);
-        Type voidStruct = new Type("void", false, true, false);
+        BasicType integer = new BasicType("int");
 
         Function main = new Function("main", integer);
         main.setRequiresDeclaration(false);
@@ -22,16 +19,16 @@ public class CompilationTest {
         main.getBlock().add(call);
         main.getBlock().add(ret);
 
+        Program program = new Program();
         program.add(Include.STDIO);
         program.add(main);
 
-        String pathToGCC="C:\\MinGW\\bin\\gcc.exe";
-        String sourceFile = "C:\\Users\\johan\\git\\cyntaja\\target\\main.c";
-        String targetFile = "C:\\Users\\johan\\git\\cyntaja\\target\\main.exe";
+        String sourceFile = Constants.workingFolder + "main.c";
+        String targetFile = Constants.workingFolder + "main.exe";
 
         program.writeToFile( sourceFile );
 
-        int result = CompileExecutor.compile(pathToGCC, sourceFile, targetFile);
+        int result = CompileExecutor.compile(Constants.pathToGCC, sourceFile, targetFile);
     }
 
 }

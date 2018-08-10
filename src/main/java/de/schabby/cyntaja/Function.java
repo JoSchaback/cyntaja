@@ -17,7 +17,7 @@ public class Function {
     /**
      * Reference to the return type. Is Void in case it does not return anything.
      */
-    private Type returnType;
+    private BasicType returnType;
 
     /**
      * Pointer to the Struct/Class it used to belong to in Jalda. Necessary because we need to resolve
@@ -42,7 +42,7 @@ public class Function {
      */
     private Block block = new Block();
 
-    public Function(String name, Type returnType)
+    public Function(String name, BasicType returnType)
     {
         this.name = name;
         this.returnType = returnType;
@@ -50,7 +50,7 @@ public class Function {
 
     private void generateHeader(PrintWriter pw)
     {
-        pw.print( returnType.toC(true)+" ");
+        pw.print( returnType.toC()+" ");
 
         pw.print(name+"(");
 
@@ -108,11 +108,11 @@ public class Function {
         isConstructor = constructor;
     }
 
-    public Type getReturnType() {
+    public BasicType getReturnType() {
         return returnType;
     }
 
-    public void setReturnType(Type returnType) {
+    public void setReturnType(BasicType returnType) {
         this.returnType = returnType;
     }
 

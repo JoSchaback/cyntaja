@@ -46,7 +46,7 @@ public class Struct {
     public Field getFieldByName(String name)
     {
         for(Field f: fields)
-            if( f.getVariable().name.equals(name) )
+            if( f.getVariable().identifier.equals(name) )
                 return f;
 
         throw new RuntimeException("could not find field with name '"+name+"' in Class '"+this.name+"'");

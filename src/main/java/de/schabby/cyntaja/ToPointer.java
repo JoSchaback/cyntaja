@@ -17,7 +17,7 @@ public class ToPointer implements Expression {
 
     @Override
     public void toC(PrintWriter pw) {
-        pw.print("&"+variable.name);
+        pw.print("&"+variable.identifier);
     }
 
     @Override

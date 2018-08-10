@@ -2,12 +2,12 @@ package de.schabby.cyntaja;
 
 import java.io.PrintWriter;
 
-public class CastExpression implements Expression
+public class Cast implements Expression
 {
-    public final Variable castType;
+    public final Type castType;
     private Expression expression;
 
-    public CastExpression(Variable castType, Expression expression)
+    public Cast(Type castType, Expression expression)
     {
         this.castType = castType;
         this.expression = expression;
@@ -15,8 +15,9 @@ public class CastExpression implements Expression
 
 
     @Override
-    public void toC(PrintWriter pw) {
-        pw.print("("+castType.typeDeclaration()+") ");
+    public void toC(PrintWriter pw)
+    {
+        pw.print("("+castType.toC()+") ");
         expression.toC(pw);
     }
 

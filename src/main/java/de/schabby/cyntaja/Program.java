@@ -19,7 +19,7 @@ public class Program {
      */
     private Map<String, Function> functions = new HashMap<>();
 
-    private List<Include> includes = new ArrayList<>();
+    private Set<Include> includes = new HashSet<>();
 
     private List<VariableDeclarationStatement> globalConstants = new ArrayList<>();
 

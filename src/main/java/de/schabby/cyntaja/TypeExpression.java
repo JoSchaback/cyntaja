@@ -4,17 +4,17 @@ import java.io.PrintWriter;
 
 public class TypeExpression implements Expression {
 
-    public final Struct type;
+    public final Type type;
     private boolean pointer = false;
 
-    public TypeExpression(Struct type) {
+    public TypeExpression(Type type) {
         this.type = type;
     }
 
     @Override
     public void toC(PrintWriter pw)
     {
-        pw.print(type.toC(false));
+        pw.print(type.toC());
         if( pointer ) pw.print('*');
     }
 

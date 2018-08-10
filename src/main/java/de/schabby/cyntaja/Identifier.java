@@ -17,11 +17,11 @@ public class Identifier implements Expression, Statement, Chainable
 
     public Identifier(Variable variable, Chainable next)
     {
-        this(variable.typeIdentifier, variable.name, next);
+        this(variable.type.getType(), variable.identifier, next);
 
-        isClassField      = variable.isClassField();
-        isMethodParameter = variable.isFunctionParameter();
-        isArray           = variable.isHeapArray();
+        //isClassField      = variable.isClassField();
+        //isMethodParameter = variable.isFunctionParameter();
+        //isArray           = variable.isHeapArray();
     }
 
     public Identifier(String type, String name, Chainable next)
