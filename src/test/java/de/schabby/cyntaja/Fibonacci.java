@@ -1,6 +1,8 @@
 package de.schabby.cyntaja;
 
 import de.schabby.cyntaja.tools.CompileExecutor;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * Computes the Fibonacci series recursively.
@@ -29,7 +31,8 @@ import de.schabby.cyntaja.tools.CompileExecutor;
  */
 public class Fibonacci {
 
-    public static void main(String[] args)
+    @Test
+    public void fibonacci()
     {
         Program program = new Program();
 
@@ -39,27 +42,39 @@ public class Fibonacci {
         Variable nVar = new Variable(Helper.int32, "n");
         fibonacci.funcParams.add(nVar);
 
-        If if1 = new If(new BinaryOperator("<=", nVar, new Literal("0")));
+        If if1 = new If(new BinaryOperator("==", nVar, new Literal("0")));
         if1.setIfStatement(new ReturnStatement(new Literal("0")));
         fibonacci.getBlock().add(if1);
         //ReturnStatement ret =
 
-        If if2 = new If(new BinaryOperator("<=", nVar, new Literal("2")));
+        If if2 = new If(new BinaryOperator("==", nVar, new Literal("1")));
         if2.setIfStatement(new ReturnStatement(new Literal("1")));
         fibonacci.getBlock().add(if2);
 
-        FunctionCall fc = new FunctionCall("fibonacci");
-//        fc.params.add(  )
+        FunctionCall fcMinus1 = new FunctionCall("fibonacci");
+        fcMinus1.params.add( new BinaryOperator("-", nVar, new Literal("1")));
+
+        FunctionCall fcMinus2 = new FunctionCall("fibonacci");
+        fcMinus2.params.add( new BinaryOperator("-", nVar, new Literal("2")));
+
+        ReturnStatement retStat = new ReturnStatement(new BinaryOperator("+", fcMinus1, fcMinus2));
+
+        fibonacci.getBlock().add(retStat);
+
+        FunctionCall call = new FunctionCall("printf");
+        call.params.add( new Literal("Fibonacci number of 10 is %i", true) );
+        call.params.add( new FunctionCall("fibonacci", new Literal("10")) );
+
+        main.getBlock().add(call);
+        main.getBlock().add(new ReturnStatement(new Literal("0")));
 
         program.add(Include.STDINT);
+        program.add(Include.STDIO);
         program.add(fibonacci);
 
-        String sourceFile = Constants.workingFolder + "fibonacci.c";
-        String targetFile = Constants.workingFolder + "fibonacci.exe";
-
-        program.writeToFile( sourceFile );
-
-        int result = CompileExecutor.compile(Constants.pathToGCC, sourceFile, targetFile);
+        final String sourceFile = Constants.workingFolder + "fibonacci.c";
+        final String targetFile = Constants.workingFolder + "fibonacci.exe";
+        CompileExecutor.writeToFileAndCompile(program, Constants.pathToGCC, sourceFile, targetFile);
     }
 
 }

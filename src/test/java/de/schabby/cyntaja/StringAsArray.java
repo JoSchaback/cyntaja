@@ -1,6 +1,7 @@
 package de.schabby.cyntaja;
 
 import de.schabby.cyntaja.tools.CompileExecutor;
+import org.junit.Test;
 
 /**
  * Simple C program:
@@ -15,7 +16,8 @@ import de.schabby.cyntaja.tools.CompileExecutor;
  */
 public class StringAsArray {
 
-    public static void main(String[] args)
+    @Test
+    public void stringsToArray()
     {
         BasicType int32   = new BasicType("int32_t");
         BasicType int8    = new BasicType("int8_t");
@@ -77,9 +79,7 @@ public class StringAsArray {
         String sourceFile = Constants.workingFolder + "string_as_array.c";
         String targetFile = Constants.workingFolder + "string_as_array.exe";
 
-        program.writeToFile( sourceFile );
-
-        int result = CompileExecutor.compile(Constants.pathToGCC, sourceFile, targetFile);
+        CompileExecutor.writeToFileAndCompile(program, Constants.pathToGCC, sourceFile, targetFile);
     }
 
 }

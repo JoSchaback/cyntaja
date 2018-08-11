@@ -1,10 +1,12 @@
 package de.schabby.cyntaja;
 
 import de.schabby.cyntaja.tools.CompileExecutor;
+import org.junit.Test;
 
-public class CompilationTest {
+public class HelloWorld {
 
-    public static void main(String[] args)
+    @Test
+    public void helloWorld()
     {
         BasicType integer = new BasicType("int");
 
@@ -23,12 +25,9 @@ public class CompilationTest {
         program.add(Include.STDIO);
         program.add(main);
 
-        String sourceFile = Constants.workingFolder + "main.c";
-        String targetFile = Constants.workingFolder + "main.exe";
-
-        program.writeToFile( sourceFile );
-
-        int result = CompileExecutor.compile(Constants.pathToGCC, sourceFile, targetFile);
+        final String sourceFile = Constants.workingFolder + "main.c";
+        final String targetFile = Constants.workingFolder + "main.exe";
+        CompileExecutor.writeToFileAndCompile(program, Constants.pathToGCC, sourceFile, targetFile);
     }
 
 }

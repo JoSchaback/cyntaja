@@ -1,11 +1,19 @@
 package de.schabby.cyntaja.tools;
 
+import de.schabby.cyntaja.Program;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CompileExecutor {
 
+    public static void writeToFileAndCompile(Program program, String pathToGCC, String sourceFile, String targetFile) {
+
+        program.writeToFile( sourceFile );
+
+        CompileExecutor.compile(pathToGCC, sourceFile, targetFile);
+    }
 
     public static int compile(String pathToGCC, String sourceFile, String targetFile) {
         try {
@@ -15,7 +23,7 @@ public class CompileExecutor {
             //String targetFile = "C:\\Users\\johan\\git\\cyntaja\\target\\main.exe";
 
             String fullCommand = pathToGCC+" "+sourceFile+" -o "+targetFile;
-            System.out.println(fullCommand);
+            //System.out.println(fullCommand);
 
             ProcessBuilder pb = new ProcessBuilder(pathToGCC, sourceFile, "-o", targetFile);
 
@@ -25,29 +33,33 @@ public class CompileExecutor {
             Process p = pb.start();
 
             //Process p = Runtime.getRuntime().exec("cmd /c dir");
-            BufferedReader bri = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            BufferedReader bre = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+            BufferedReader brInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            BufferedReader brError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
             List<CompilerMessage> messages = new ArrayList<>();
 
-            while ((line = bri.readLine()) != null)
+            while ((line = brInput.readLine()) != null)
             {
                 System.out.println("input stream: "+line);
-                CompilerMessage message = new CompilerMessage(false, line);
-                messages.add(message);
+                //CompilerMessage message = new CompilerMessage(false, line);
+                //messages.add(message);
             }
 
-            bri.close();
+            brInput.close();
 
-            while ((line = bre.readLine()) != null)
+            boolean hasError = false;
+            while ((line = brError.readLine()) != null)
             {
                 System.out.println("error stream: "+line);
-                CompilerMessage message = new CompilerMessage(true, line);
-                messages.add(message);
+                //CompilerMessage message = new CompilerMessage(true, line);
+                //messages.add(message);
+                hasError = true;
             }
-            bre.close();
+            brError.close();
 
             int result = p.waitFor();
+
+            if( hasError ) throw new RuntimeException("compilation error");
 
             return result;
         }
