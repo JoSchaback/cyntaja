@@ -8,7 +8,11 @@ public class For implements Statement {
     private Statement initStmnt;
     private Expression conditional;
     private Statement increment;
-    private Statement execStatement;
+    private Statement execStatement = Null.INSTANCE;
+
+    public For() {
+        this(Null.INSTANCE, Null.INSTANCE, Null.INSTANCE);
+    }
 
     public For(Statement initStmnt, Expression conditional, Statement increment) {
         this.initStmnt = initStmnt;

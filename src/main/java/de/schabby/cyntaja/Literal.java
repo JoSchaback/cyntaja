@@ -22,12 +22,14 @@ public class Literal implements Expression
     public void toC(PrintWriter pw)
     {
         // if( literal.contains("b") )
-        String v = literal.replace("b", "");
+
 
         if( withQuotes )
-            pw.print("\""+v+"\"");
-        else
+            pw.print("\""+literal+"\"");
+        else {
+            String v = literal.replace("b", "");
             pw.print(v);
+        }
     }
 
     @Override

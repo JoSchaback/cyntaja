@@ -6,8 +6,10 @@ package de.schabby.cyntaja;
  */
 public class Helper {
 
-    public static final BasicType int32 = new BasicType("int32_t");
-    public static final BasicType int8  = new BasicType("int8_t");
+    public static final BasicType int32  = new BasicType("int32_t");
+    public static final BasicType uint32 = new BasicType("uint32_t");
+    public static final BasicType int8   = new BasicType("int8_t");
+    public static final BasicType uint8  = new BasicType("uint8_t");
 
     public static Function createMainFunction(Program program)
     {

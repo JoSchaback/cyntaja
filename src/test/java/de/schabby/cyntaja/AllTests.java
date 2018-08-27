@@ -9,7 +9,7 @@ import org.junit.runners.Suite;
         StringAsArray.class,
         Fibonacci.class})
 public class AllTests {
-    
+
     public void runAllTests() {
 
     }
