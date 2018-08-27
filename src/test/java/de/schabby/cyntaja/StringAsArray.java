@@ -36,17 +36,17 @@ public class StringAsArray {
         Variable array = new Variable(int8Array, "array");
         VariableDeclarationStatement vds = new VariableDeclarationStatement(array, cast);
 
-        AssignmentStatement ass0 = new AssignmentStatement(new ArrayAccess(array, new Literal("0")), new Literal("104"), "=");
-        AssignmentStatement ass1 = new AssignmentStatement(new ArrayAccess(array, new Literal("1")), new Literal("97"), "=");
-        AssignmentStatement ass2 = new AssignmentStatement(new ArrayAccess(array, new Literal("2")), new Literal("108"), "=");
-        AssignmentStatement ass3 = new AssignmentStatement(new ArrayAccess(array, new Literal("3")), new Literal("108"), "=");
-        AssignmentStatement ass4 = new AssignmentStatement(new ArrayAccess(array, new Literal("4")), new Literal("111"), "=");
-        AssignmentStatement ass5 = new AssignmentStatement(new ArrayAccess(array, new Literal("5")), new Literal("32"), "=");
-        AssignmentStatement ass6 = new AssignmentStatement(new ArrayAccess(array, new Literal("6")), new Literal("66"), "=");
-        AssignmentStatement ass7 = new AssignmentStatement(new ArrayAccess(array, new Literal("7")), new Literal("111"), "=");
-        AssignmentStatement ass8 = new AssignmentStatement(new ArrayAccess(array, new Literal("8")), new Literal("104"), "=");
-        AssignmentStatement ass9 = new AssignmentStatement(new ArrayAccess(array, new Literal("9")), new Literal("114"), "=");
-        AssignmentStatement ass10 = new AssignmentStatement(new ArrayAccess(array, new Literal("10")), new Literal("0"), "=");
+        AssignmentStatement ass0 = new AssignmentStatement(new ArrayAccess(array, new Literal("0")), "=", new Literal("104"));
+        AssignmentStatement ass1 = new AssignmentStatement(new ArrayAccess(array, new Literal("1")), "=", new Literal("97"));
+        AssignmentStatement ass2 = new AssignmentStatement(new ArrayAccess(array, new Literal("2")), "=", new Literal("108"));
+        AssignmentStatement ass3 = new AssignmentStatement(new ArrayAccess(array, new Literal("3")), "=", new Literal("108"));
+        AssignmentStatement ass4 = new AssignmentStatement(new ArrayAccess(array, new Literal("4")), "=", new Literal("111"));
+        AssignmentStatement ass5 = new AssignmentStatement(new ArrayAccess(array, new Literal("5")), "=", new Literal("32"));
+        AssignmentStatement ass6 = new AssignmentStatement(new ArrayAccess(array, new Literal("6")), "=", new Literal("66"));
+        AssignmentStatement ass7 = new AssignmentStatement(new ArrayAccess(array, new Literal("7")), "=", new Literal("111"));
+        AssignmentStatement ass8 = new AssignmentStatement(new ArrayAccess(array, new Literal("8")), "=", new Literal("104"));
+        AssignmentStatement ass9 = new AssignmentStatement(new ArrayAccess(array, new Literal("9")), "=", new Literal("114"));
+        AssignmentStatement ass10 = new AssignmentStatement(new ArrayAccess(array, new Literal("10")), "=", new Literal("0"));
 
         FunctionCall call = new FunctionCall("puts", array);
 

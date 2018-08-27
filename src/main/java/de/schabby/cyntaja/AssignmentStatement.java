@@ -7,7 +7,7 @@ public class AssignmentStatement implements Statement
     private Expression target, source;
     private String operator;
 
-    public AssignmentStatement(Expression target, Expression source, String operator)
+    public AssignmentStatement(Expression target, String operator, Expression source)
     {
         this.target   = target;
         this.source   = source;

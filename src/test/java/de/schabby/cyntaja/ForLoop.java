@@ -28,7 +28,7 @@ public class ForLoop {
         Block forBlock = new Block();
         forLoop.setExecStatement(forBlock);
 
-        forBlock.add( new AssignmentStatement(sumVar, counterVar, "+=") );
+        forBlock.add( new AssignmentStatement(sumVar, "+=", counterVar) );
 
         FunctionCall call = new FunctionCall("printf");
         call.params.add( new Literal("loop number of %i is sum as %i\\n", true) );
