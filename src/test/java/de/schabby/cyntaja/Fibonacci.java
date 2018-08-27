@@ -1,7 +1,6 @@
 package de.schabby.cyntaja;
 
 import de.schabby.cyntaja.tools.CompileExecutor;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -38,8 +37,8 @@ public class Fibonacci {
 
         Function main = Helper.createMainFunction(program);
 
-        Function fibonacci = new Function("fibonacci", Helper.int32);
-        Variable nVar = new Variable(Helper.int32, "n");
+        Function fibonacci = new Function("fibonacci", Helper.INT32);
+        Variable nVar = new Variable(Helper.INT32, "n");
         fibonacci.funcParams.add(nVar);
 
         If if1 = new If(new BinaryOperator("==", nVar, new Literal("0")));

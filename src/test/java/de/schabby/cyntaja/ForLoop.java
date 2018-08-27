@@ -16,11 +16,11 @@ public class ForLoop {
 
         Function main = Helper.createMainFunction(program);
 
-        Variable sumVar = new Variable(Helper.uint8, "sum");
+        Variable sumVar = new Variable(Helper.UINT8, "sum");
         main.getBlock().add(new VariableDeclarationStatement(sumVar, new Literal("0")));
 
         For forLoop = new For();
-        Variable counterVar = new Variable(Helper.uint8, "counter");
+        Variable counterVar = new Variable(Helper.UINT8, "counter");
         forLoop.setInitStmnt( new VariableDeclarationStatement(counterVar, new Literal("0")) );
         forLoop.setConditional( new BinaryOperator("<", counterVar, new Literal("5")) );
         forLoop.setIncrement( new UnaryOperator("++", counterVar, false));
