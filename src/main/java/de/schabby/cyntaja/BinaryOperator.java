@@ -8,7 +8,7 @@ public class BinaryOperator implements Expression {
     private Expression left;
     private Expression right;
 
-    public BinaryOperator(String operator, Expression left, Expression right) {
+    public BinaryOperator(Expression left, String operator, Expression right) {
         this.operator = operator;
         this.left = left;
         this.right = right;

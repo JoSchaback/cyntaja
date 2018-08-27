@@ -41,22 +41,22 @@ public class Fibonacci {
         Variable nVar = new Variable(Helper.INT32, "n");
         fibonacci.funcParams.add(nVar);
 
-        If if1 = new If(new BinaryOperator("==", nVar, new Literal("0")));
+        If if1 = new If(new BinaryOperator(nVar, "==", new Literal("0")));
         if1.setIfStatement(new ReturnStatement(new Literal("0")));
         fibonacci.getBlock().add(if1);
         //ReturnStatement ret =
 
-        If if2 = new If(new BinaryOperator("==", nVar, new Literal("1")));
+        If if2 = new If(new BinaryOperator(nVar, "==", new Literal("1")));
         if2.setIfStatement(new ReturnStatement(new Literal("1")));
         fibonacci.getBlock().add(if2);
 
         FunctionCall fcMinus1 = new FunctionCall("fibonacci");
-        fcMinus1.params.add( new BinaryOperator("-", nVar, new Literal("1")));
+        fcMinus1.params.add( new BinaryOperator(nVar, "-", new Literal("1")));
 
         FunctionCall fcMinus2 = new FunctionCall("fibonacci");
-        fcMinus2.params.add( new BinaryOperator("-", nVar, new Literal("2")));
+        fcMinus2.params.add( new BinaryOperator(nVar, "-", new Literal("2")));
 
-        ReturnStatement retStat = new ReturnStatement(new BinaryOperator("+", fcMinus1, fcMinus2));
+        ReturnStatement retStat = new ReturnStatement(new BinaryOperator(fcMinus1, "+", fcMinus2));
 
         fibonacci.getBlock().add(retStat);
 

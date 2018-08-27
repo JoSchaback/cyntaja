@@ -22,7 +22,7 @@ public class ForLoop {
         For forLoop = new For();
         Variable counterVar = new Variable(Helper.UINT8, "counter");
         forLoop.setInitStmnt( new VariableDeclarationStatement(counterVar, new Literal("0")) );
-        forLoop.setConditional( new BinaryOperator("<", counterVar, new Literal("5")) );
+        forLoop.setConditional( new BinaryOperator(counterVar, "<", new Literal("5")) );
         forLoop.setIncrement( new UnaryOperator("++", counterVar, false));
 
         Block forBlock = new Block();

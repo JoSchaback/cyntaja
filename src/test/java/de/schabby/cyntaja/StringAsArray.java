@@ -29,7 +29,7 @@ public class StringAsArray {
         // int8_t* array = (int8_t*) malloc(sizeof(int8_t) * 10);
         // first we do the right hand side of the = declaration
         FunctionCall sizeof = new FunctionCall("sizeof", new TypeExpression(int8Array.getBasicType()));
-        BinaryOperator mult = new BinaryOperator("*", sizeof, new Literal("10"));
+        BinaryOperator mult = new BinaryOperator(sizeof, "*", new Literal("10"));
         FunctionCall malloc = new FunctionCall("malloc", mult);
         Cast cast = new Cast(int8Array, malloc);
         // now the left hand side
