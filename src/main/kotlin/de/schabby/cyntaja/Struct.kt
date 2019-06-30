@@ -1,6 +1,7 @@
 package de.schabby.cyntaja
 
-class Struct(name:String) : Writable, Type(name) {
+class Struct(name:String) : Writable, ValueType(name) {
+
     override fun writeCode(): String {
         val sb = StringBuilder()
         sb.append("typedef struct {\n")

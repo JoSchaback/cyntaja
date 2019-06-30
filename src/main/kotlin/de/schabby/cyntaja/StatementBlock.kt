@@ -1,5 +1,7 @@
 package de.schabby.cyntaja
 
+import de.schabby.cyntaja.tools.malloc
+
 class StatementBlock(val parent:VariableContainer) : Writable {
     val list = mutableListOf<Statement>()
     override fun writeCode(): String {
@@ -67,6 +69,32 @@ class StatementBlock(val parent:VariableContainer) : Writable {
         }
 
         return parent.findVar(name)
+    }
+
+    fun structMallocDeclaration(varName:String, struct:Struct) {
+        variableDeclaration(struct.asPointer, varName, malloc(struct))
+    }
+
+    /**
+     * shorthand for <code>functionCall("printf", StringLiteral(stringLiteral))</code>
+     */
+    fun printf(stringLiteral:String) {
+        functionCall("printf", StringLiteral(stringLiteral))
+    }
+
+
+    /**
+     * shorthand for functionCall("printf", StringLiteral(stringLiteral), exp1)
+     */
+    fun printf(stringLiteral:String, exp1:Expression) {
+        functionCall("printf", StringLiteral(stringLiteral), exp1)
+    }
+
+    /**
+     * shorthand for functionCall("printf", StringLiteral(stringLiteral), exp1, exp2)
+     */
+    fun printf(stringLiteral:String, exp1:Expression, exp2:Expression) {
+        functionCall("printf", StringLiteral(stringLiteral), exp1, exp2)
     }
 
 }

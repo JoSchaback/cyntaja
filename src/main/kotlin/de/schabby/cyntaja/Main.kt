@@ -1,8 +1,7 @@
 package de.schabby.cyntaja
 
-import de.schabby.cyntaja.Type.Companion.charPtr
+import de.schabby.cyntaja.Type.Companion.char
 import de.schabby.cyntaja.Type.Companion.int
-import de.schabby.cyntaja.Type.Companion.intPtr
 
 fun main(args: Array<String>) {
 
@@ -11,15 +10,15 @@ fun main(args: Array<String>) {
         include(Include.STDINT)
 
         val book = struct("Book") {
-            field("name", charPtr)
-            field("other", intPtr)
+            field("name", char.asPointer)
+            field("other", int.asPointer)
             field("great", int)
         }
 
         val helloWorld = function("helloWorld") {
             parameters {
                 variable("i", int)
-                variable("j", intPtr)
+                variable("j", int.asPointer)
             }
             body {
                 variableDeclaration(int, "someVar")

@@ -1,9 +1,9 @@
 package de.schabby.cyntaja
 
-class ArraySubscript(val variable: Variable, val subscript: Expression) :
-    LValue {
+class ArraySubscript(val variable: Variable, val subscript: Expression) : LValue {
+
     override fun isPointer(): Boolean {
-        return variable.type.isPointer
+        return variable.type is PointerType
     }
 
     init {

@@ -1,7 +1,6 @@
 package de.schabby.cyntaja
 
 import de.schabby.cyntaja.Type.Companion.int
-import de.schabby.cyntaja.Type.Companion.intPtr
 import de.schabby.cyntaja.tools.malloc
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
@@ -21,7 +20,7 @@ class MallocTest {
             function("main") {
                 returnType = Type.int
                 body {
-                    variableDeclaration(intPtr, "intPtr", malloc(int, 100))
+                    variableDeclaration(int.asPointer, "intPtr", malloc(int, 100))
                     functionCall("printf", StringLiteral("address %p"), VarIdentifier(findVar("intPtr")))
                     returnStatement(Literal("0"))
                 }
@@ -31,7 +30,7 @@ class MallocTest {
         gcc.writeToFileAndCompile(p, "gcc", "build/malloc.c", "build/malloc")
         val lines = runExecutable("build/malloc")
 
-        //Assertions.assertThat(lines[0]).isEqualTo("Hello, World!")
+        Assertions.assertThat(lines[0].startsWith("address "))
     }
 
 

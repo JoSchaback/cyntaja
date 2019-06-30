@@ -1,5 +1,7 @@
 package de.schabby.cyntaja
 
+import de.schabby.cyntaja.Type.Companion.char
+import de.schabby.cyntaja.Type.Companion.int
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -14,15 +16,15 @@ class MoreSophisticatedTest {
             include(Include.STDINT)
 
             val book = struct("Book") {
-                field("name", Type.charPtr)
-                field("other", Type.intPtr)
-                field("great", Type.int)
+                field("name", char.asPointer)
+                field("other", int.asPointer)
+                field("great", int)
             }
 
             val helloWorld = function("helloWorld") {
                 parameters {
-                    variable("i", Type.int)
-                    variable("j", Type.intPtr)
+                    variable("i", int)
+                    variable("j", int.asPointer)
                 }
                 body {
                     variableDeclaration(Type.int, "someVar")
