@@ -3,7 +3,7 @@ Syntax Tree builder for the C programming language in Kotlin.
 
 For example, building the syntax tree of a simple "Hello, World" example looks like that in Cyntaja:
 ```kotlin
-val p = Program().build {
+Program().build {
     include(Include.STDIO)
     include(Include.STDINT)
 
@@ -16,7 +16,7 @@ val p = Program().build {
     }
 }
 ```
-The code above generates C code like this
+The code above generates the following C code:
 ```c
 #include<stdio.h>
 #include<stdint.h>
