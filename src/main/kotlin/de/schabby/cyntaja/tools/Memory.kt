@@ -4,20 +4,21 @@ import de.schabby.cyntaja.*
 import java.lang.RuntimeException
 
 /**
- * returns Expression for memory allocation.
- * (struct foo *) malloc(sizeof(struct foo));
+ * Returns malloc() Expression for memory allocation. With 'foo' being a Struct type, the method
+ * returns a shorthand for <code>(struct foo *) malloc(sizeof(struct foo));</code>
  */
 fun malloc(type: ValueType, time:Int) : Expression {
+    if( time < 1) throw RuntimeException("parameter 'time' can not be less than 1 (it is $time)")
     val malloc = FunctionCall("malloc")
-    malloc.parameters.add(BinaryOperator(Sizeof(type), "*", Literal(time.toString())))
+    if( time >1 ) {
+        malloc.parameters.add(BinaryOperator(Sizeof(type), "*", Literal(time.toString())))
+    } else {
+        malloc.parameters.add(Sizeof(type))
+    }
+
     return Casting(type.asPointer, malloc)
 }
 
 fun malloc(type: ValueType) : Expression  = malloc(type, 1)
 
 
-fun malloc(type: ValueType, time:Variable) : Expression {
-    val malloc = FunctionCall("malloc")
-    malloc.parameters.add(BinaryOperator(Sizeof(type), "*", VarIdentifier(time)))
-    return Casting(type.asPointer, malloc)
-}

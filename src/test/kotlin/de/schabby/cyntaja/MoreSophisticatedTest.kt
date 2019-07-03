@@ -2,7 +2,6 @@ package de.schabby.cyntaja
 
 import de.schabby.cyntaja.Type.Companion.char
 import de.schabby.cyntaja.Type.Companion.int
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -45,8 +44,8 @@ class MoreSophisticatedTest {
                             functionCall("printf", StringLiteral("Hi, this is the 'else' block\\n"))
                         }
                     }
-                    assignment(MemberAccess(VarIdentifier(bookVar), VarIdentifier(book.fields[2])), BinaryOperator(Literal("12"), "+", Literal("13")))
-                    //assignment(MemberAccess(VarIdentifier(bookVar),ArraySubscript(book.fields[0], Literal("3"))), CharLiteral('l'))
+                    assignment(FieldAccess(VarIdentifier(bookVar), VarIdentifier(book.fields[2])), BinaryOperator(Literal("12"), "+", Literal("13")))
+                    //assignment(FieldAccess(VarIdentifier(bookVar),ArraySubscript(book.fields[0], Literal("3"))), CharLiteral('l'))
                 }
             }
             function("main") {

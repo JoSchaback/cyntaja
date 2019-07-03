@@ -39,10 +39,10 @@ fun main(args: Array<String>) {
                         functionCall("printf", StringLiteral("Hi, this is the 'else' block\\n"))
                     }
                 }
-                assignment(MemberAccess(VarIdentifier(bookVar), VarIdentifier(book.fields[2])),
+                assignment(FieldAccess(VarIdentifier(bookVar), VarIdentifier(book.fields[2])),
                     BinaryOperator(Literal("12"), "+", Literal("13"))
                 )
-                assignment(MemberAccess(VarIdentifier(bookVar),
+                assignment(FieldAccess(VarIdentifier(bookVar),
                     ArraySubscript(book.fields[0], Literal("3"))
                 ), CharLiteral('l'))
             }

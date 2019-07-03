@@ -3,12 +3,12 @@ package de.schabby.cyntaja
 /**
  * Either dot (.) or arrow (->) depending on whether lvalue is pointer or not.
  */
-class MemberAccess(val left:LValue, val right:LValue) : LValue {
+class FieldAccess(val left:LValue, val right:LValue) : LValue {
 
     override fun isPointer(): Boolean = right.isPointer()
 
     init {
-      //  if (left.type !is Struct) throw RuntimeException("MemberAccess references into Structs, but lvalue is of type ${left.type.name}")
+      //  if (left.type !is Struct) throw RuntimeException("FieldAccess references into Structs, but lvalue is of type ${left.type.name}")
     }
 
     override fun writeCode(): String {

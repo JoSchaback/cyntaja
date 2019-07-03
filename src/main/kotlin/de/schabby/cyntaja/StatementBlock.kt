@@ -61,6 +61,19 @@ class StatementBlock(val parent:VariableContainer) : Writable {
         list.add(AssignmentStatement(lvalue, exp))
     }
 
+    /**
+     * Convenience function for a shorthand of
+     * <code>MemberAccess(VarIdentifier(var1), VarIdentifier(var2))</code>
+     */
+    fun fieldAccess(var1:Variable, var2:Variable) : FieldAccess {
+        return FieldAccess(VarIdentifier(var1), VarIdentifier(var2))
+    }
+
+    fun fieldAccess(var1:Variable, var2:Variable, var3:Variable) : FieldAccess {
+        return FieldAccess(FieldAccess(VarIdentifier(var1), VarIdentifier(var2)), VarIdentifier(var3))
+    }
+
+
     fun findStruct(name:String) : Struct = parent.findStruct(name)
 
     fun findVar(name:String) : Variable {
@@ -71,8 +84,13 @@ class StatementBlock(val parent:VariableContainer) : Writable {
         return parent.findVar(name)
     }
 
-    fun structMallocDeclaration(varName:String, struct:Struct) {
-        variableDeclaration(struct.asPointer, varName, malloc(struct))
+    /**
+     * Declares a pointer variable to a new memory space of a Struct on the heap.
+     *
+     * Shorthand for <code>variableDeclaration(struct.asPointer, varName, malloc(struct))</code>
+     */
+    fun structMallocDeclaration(varName:String, struct:Struct) : Variable {
+        return variableDeclaration(struct.asPointer, varName, malloc(struct))
     }
 
     /**
