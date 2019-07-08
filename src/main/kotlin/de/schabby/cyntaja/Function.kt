@@ -16,7 +16,7 @@ class Function(val name:String, val program: Program) : Writable,
     }
 
     val parameters = FunctionParameters()
-    var returnType = void
+    var returnType : Type = void
     val body = StatementBlock(this)
 
     override fun writeCode(): String {

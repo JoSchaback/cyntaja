@@ -56,6 +56,10 @@ class StatementBlock(val parent:VariableContainer) : Writable {
         list.add(ifStmt)
     }
 
+    fun code(code:String) {
+        list.add(Code(code))
+    }
+
 
     fun assignment(lvalue:LValue, exp: Expression) {
         list.add(AssignmentStatement(lvalue, exp))

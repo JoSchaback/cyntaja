@@ -5,9 +5,10 @@ import java.io.File
 
 class Program(var importStd:Boolean = false) {
 
-    val functions = mutableListOf<Function>()
-    val structs   = mutableListOf<Struct>()
-    val includes  = mutableListOf<Include>()
+    val functions  = mutableListOf<Function>()
+    val structs    = mutableListOf<Struct>()
+    val includes   = mutableListOf<Include>()
+    val globalVars = mutableListOf<VariableDeclaration>()
 
     fun writeToFile(filename:String) {
 
@@ -23,6 +24,9 @@ class Program(var importStd:Boolean = false) {
             pwd.println(it.writeCode())
         }
 
+        globalVars.forEach {
+            pwd.println(it.writeCode()+";")
+        }
 
         functions.forEach {
             pwd.println(it.writeCode())
@@ -45,6 +49,18 @@ class Program(var importStd:Boolean = false) {
         s.apply(block)
         structs.add(s)
         return s
+    }
+
+    fun globalVar(varType:Type, varName:String, exp:Expression) : Variable {
+        val s = VariableDeclaration(varType, varName, exp)
+        globalVars.add(s)
+        return s.variable
+    }
+
+    fun globalVar(varType:Type, varName:String) : Variable {
+        val s = VariableDeclaration(varType, varName)
+        globalVars.add(s)
+        return s.variable
     }
 
     fun include(lib:String) {
