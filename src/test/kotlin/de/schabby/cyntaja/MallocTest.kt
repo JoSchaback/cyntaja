@@ -1,6 +1,6 @@
 package de.schabby.cyntaja
 
-import de.schabby.cyntaja.Type.Companion.int
+import de.schabby.cyntaja.Type.Companion.i32
 import de.schabby.cyntaja.tools.malloc
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
@@ -18,10 +18,10 @@ class MallocTest {
             include(Include.STDLIB)
 
             function("main") {
-                returnType = Type.int
+                returnType = i32
                 body {
-                    variableDeclaration(int.asPointer, "intPtr", malloc(int, 100))
-                    functionCall("printf", StringLiteral("address %p"), VarIdentifier(findVar("intPtr")))
+                    variableDeclaration(i32.asPointer, "intPtr", malloc(i32, 100))
+                    functionCall("printf", StringLiteral("address %p\\n"), VarIdentifier(findVar("intPtr")))
                     returnStatement(Literal("0"))
                 }
             }

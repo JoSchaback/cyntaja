@@ -14,14 +14,14 @@ class StructTest {
             include(Include.STDLIB)
 
             val date = struct("Date") {
-                field("year", Type.uint)
-                field("month", Type.uint)
-                field("day_in_month", Type.uint)
+                field("year", Type.u32)
+                field("month", Type.u32)
+                field("day_in_month", Type.u32)
             }
 
             val string = struct("String") {
                 field("chars", Type.char.asPointer)
-                field("length", Type.uint)
+                field("length", Type.u32)
             }
 
             val author = struct("Author") {
@@ -51,7 +51,7 @@ class StructTest {
             }
 
             function("main") {
-                returnType = Type.int
+                returnType = Type.u32
                 body {
                     printf("hello, this is a test\\n")
                     val b1 = structMallocDeclaration("b1", book)
@@ -83,7 +83,9 @@ class StructTest {
                     printf("\\n")
                     printf("J. R. R. Tolkien was born on ")
                     functionCall("print_date", fieldAccess(adams, author.field("date_of_birth")))
-                    Return(Literal("0"))
+                    printf("\\n")
+                    printf("reached the end!\\n")
+                    returnStatement(Literal("0"))
                 }
             }
 

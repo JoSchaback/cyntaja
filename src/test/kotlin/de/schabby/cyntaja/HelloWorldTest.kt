@@ -16,7 +16,7 @@ class HelloWorldTest {
             include(Include.STDINT)
 
             function("main") {
-                returnType = Type.int
+                returnType = Type.i32
                 body {
                     functionCall("printf", StringLiteral("Hello, World!"))
                     returnStatement(Literal("0"))

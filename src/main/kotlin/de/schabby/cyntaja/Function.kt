@@ -2,7 +2,7 @@ package de.schabby.cyntaja
 
 import de.schabby.cyntaja.Type.Companion.void
 
-class Function(val name:String, val program: Program) : Writable,
+class Function(var name:String, val program: Program) : Writable,
     VariableContainer {
 
     override fun findStruct(name: String): Struct = program.findStruct(name)
@@ -21,7 +21,7 @@ class Function(val name:String, val program: Program) : Writable,
 
     override fun writeCode(): String {
         val sb = StringBuilder()
-        sb.append(returnType.writeCode())
+        sb.append(returnType.name)
         sb.append(" ")
         sb.append(name)
         sb.append('(')
@@ -39,6 +39,17 @@ class Function(val name:String, val program: Program) : Writable,
     fun body(block: StatementBlock.()->Unit) {
         body.apply(block)
     }
+
+    fun writeDeclaration(): String {
+        val sb = StringBuilder()
+        sb.append(returnType.name)
+        sb.append(" ")
+        sb.append(name)
+        sb.append('(')
+        sb.append(parameters.writeCode())
+        sb.append(");\n")
+        return sb.toString()
+    }
 }
 
 class FunctionParameters() : Writable {
@@ -47,7 +58,7 @@ class FunctionParameters() : Writable {
     override fun writeCode(): String {
         val sb = StringBuilder()
         list.forEachIndexed { index, t ->
-            sb.append(t.type.writeCode())
+            sb.append(t.type.name)
             sb.append(" ")
             sb.append(t.name)
             commaIfLast(list, index, sb)

@@ -4,6 +4,8 @@ import java.lang.RuntimeException
 
 class Struct(name:String) : Writable, ValueType(name) {
 
+    val fields = mutableListOf<Variable>()
+
     override fun writeCode(): String {
         val sb = StringBuilder()
         sb.append("typedef struct {\n")
@@ -14,8 +16,6 @@ class Struct(name:String) : Writable, ValueType(name) {
         sb.append("} $name;")
         return sb.toString()
     }
-
-    val fields = mutableListOf<Variable>()
 
     /**
      * Adds a new field to this Struct.

@@ -19,19 +19,22 @@ class Program(var importStd:Boolean = false) {
         includes.forEach {
             pwd.println(it.writeCode())
         }
-
+        pwd.println("// ====[ Structs ]====")
         structs.forEach {
             pwd.println(it.writeCode())
         }
-
+        pwd.println("// ====[ Functions Declarations ]====")
+        functions.forEach {
+            pwd.println(it.writeDeclaration())
+        }
+        pwd.println("// ====[ Global Vars ]====")
         globalVars.forEach {
             pwd.println(it.writeCode()+";")
         }
-
+        pwd.println("// ====[ Functions ]====")
         functions.forEach {
             pwd.println(it.writeCode())
         }
-
         pwd.println("// end of file")
         pwd.close()
 

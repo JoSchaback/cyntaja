@@ -4,6 +4,7 @@ import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 object gcc {
 
@@ -106,6 +107,8 @@ fun runExecutable(pathToExecutable:String) : List<String> {
         error = true
         line = brInput.readLine()
     }
+
+    p.waitFor(5L, TimeUnit.SECONDS)
 
     if(p.exitValue() != 0) throw RuntimeException("exit value was ${p.exitValue()}")
 

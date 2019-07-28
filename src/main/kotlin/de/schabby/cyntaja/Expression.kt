@@ -4,7 +4,7 @@ interface Expression : Writable {
 
 }
 
-object emptyExpression : Expression {
+object EmptyExpression : Expression {
     override fun writeCode() = "()"
 
 }
