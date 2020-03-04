@@ -50,6 +50,19 @@ class StatementBlock(val parent:VariableContainer) : Writable {
         return s.variable
     }
 
+    fun arrayDeclaration(varType:Type, varName:String) : Variable {
+        println("in arrayDeclaration()")
+        val s = ArrayDeclaration(varType, varName)
+        list.add(s)
+        return s.variable
+    }
+
+    fun arrayDeclaration(varType:Type, varName:String, assignmentExp: Expression) : Variable {
+        val s = ArrayDeclaration(varType, varName, assignmentExp)
+        list.add(s)
+        return s.variable
+    }
+
     fun ifStatement(booleanExp: Expression, block:IfStatment.()->Unit) {
         val ifStmt = IfStatment(booleanExp, this)
         ifStmt.apply(block)

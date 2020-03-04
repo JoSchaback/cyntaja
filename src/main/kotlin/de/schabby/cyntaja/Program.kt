@@ -5,10 +5,11 @@ import java.io.File
 
 class Program(var importStd:Boolean = false) {
 
-    val functions  = mutableListOf<Function>()
-    val structs    = mutableListOf<Struct>()
-    val includes   = mutableListOf<Include>()
-    val globalVars = mutableListOf<VariableDeclaration>()
+    val functions    = mutableListOf<Function>()
+    val structs      = mutableListOf<Struct>()
+    val includes     = mutableListOf<Include>()
+    val globalVars   = mutableListOf<VariableDeclaration>()
+    val globalArrays = mutableListOf<ArrayDeclaration>()
 
     fun writeToFile(filename:String) {
 
@@ -24,8 +25,17 @@ class Program(var importStd:Boolean = false) {
             pwd.println(it.writeCode())
         }
         pwd.println("// ====[ Functions Declarations ]====")
-        functions.forEach {
-            pwd.println(it.writeDeclaration())
+        functions.forEach { pwd.println(it.writeDeclaration()) }
+
+        pwd.println("// ====[ Global Array Declarations ]====")
+        globalArrays.forEach { pwd.println(it.writeDeclaration()+";") }
+
+        pwd.println("// ====[ Global Vars ]====")
+        globalVars.forEach { pwd.println(it.writeDeclaration()+";") }
+
+        pwd.println("// ====[ Global Arrays ]====")
+        globalArrays.forEach {
+            pwd.println(it.writeCode()+";")
         }
         pwd.println("// ====[ Global Vars ]====")
         globalVars.forEach {
@@ -54,15 +64,27 @@ class Program(var importStd:Boolean = false) {
         return s
     }
 
-    fun globalVar(varType:Type, varName:String, exp:Expression) : Variable {
-        val s = VariableDeclaration(varType, varName, exp)
+    fun globalVar(varType:Type, varName:String, exp:Expression, const:Boolean=false) : Variable {
+        val s = VariableDeclaration(varType, varName, exp, const)
         globalVars.add(s)
         return s.variable
     }
 
-    fun globalVar(varType:Type, varName:String) : Variable {
-        val s = VariableDeclaration(varType, varName)
+    fun globalVar(varType:Type, varName:String, const:Boolean=false) : Variable {
+        val s = VariableDeclaration(varType, varName, EmptyExpression, const)
         globalVars.add(s)
+        return s.variable
+    }
+
+    fun globalArray(varType:Type, varName:String, const:Boolean=false) : Variable {
+        val s = ArrayDeclaration(varType, varName, EmptyExpression, const)
+        globalArrays.add(s)
+        return s.variable
+    }
+
+    fun globalArray(varType:Type, varName:String, exp:Expression, const:Boolean=false) : Variable {
+        val s = ArrayDeclaration(varType, varName, exp, const)
+        globalArrays.add(s)
         return s.variable
     }
 
