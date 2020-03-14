@@ -5,7 +5,27 @@ fun commaIfLast(list:List<Any>, index:Int, sb:StringBuilder) {
         sb.append(", ")
 }
 
-class FunctionCall(val funcName:String) : Statement, Expression {
+class FunctionCall(val function:Function) : Statement, Expression {
+
+    val parameters = mutableListOf<Expression>()
+
+    override fun writeCode(): String {
+        val sb = StringBuilder()
+        sb.append(function.name)
+        sb.append('(')
+        parameters.forEachIndexed { index, t ->
+            sb.append(t.writeCode())
+            commaIfLast(parameters, index, sb)
+        }
+        sb.append(')')
+
+        return sb.toString()
+    }
+
+
+}
+
+class FunctionCallLibrary(val funcName:String) : Statement, Expression {
 
     val parameters = mutableListOf<Expression>()
 

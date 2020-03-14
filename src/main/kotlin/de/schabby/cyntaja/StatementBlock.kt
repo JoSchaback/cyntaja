@@ -9,13 +9,18 @@ class StatementBlock(val parent:VariableContainer) : Writable {
         list.forEach {s ->
             sb.append("   ")
             sb.append(s.writeCode())
-            sb.append(";\n")
+
+            // always append a semicolon, except if it is native code already which has to be correct native code that
+            // can be copied "as is".
+            if( s !is Code ) sb.append(';')
+
+            sb.append('\n')
         }
         return sb.toString()
     }
 
     fun functionCall(name:String, vararg params: Expression) {
-        val fb = FunctionCall(name)
+        val fb = FunctionCallLibrary(name)
         params.forEach {
             fb.parameters.add(it)
         }
@@ -29,7 +34,7 @@ class StatementBlock(val parent:VariableContainer) : Writable {
 
 
     fun functionCall(func: Function, vararg params: Expression) {
-        val fb = FunctionCall(func.name)
+        val fb = FunctionCall(func)
         params.forEach {
             fb.parameters.add(it)
         }
@@ -38,7 +43,6 @@ class StatementBlock(val parent:VariableContainer) : Writable {
 
 
     fun variableDeclaration(varType:Type, varName:String) : Variable {
-        println("in variableDeclaration()")
         val s = VariableDeclaration(varType, varName)
         list.add(s)
         return s.variable
@@ -51,7 +55,6 @@ class StatementBlock(val parent:VariableContainer) : Writable {
     }
 
     fun arrayDeclaration(varType:Type, varName:String) : Variable {
-        println("in arrayDeclaration()")
         val s = ArrayDeclaration(varType, varName)
         list.add(s)
         return s.variable

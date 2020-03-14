@@ -92,6 +92,6 @@ class StructTest {
         }
         val execname = "structtest"
         gcc.writeToFileAndCompile(p, "gcc", "build/$execname.c", "build/$execname")
-        val lines = runExecutable("build/$execname")
+        /*val lines = */runExecutable("build/$execname")
     }
 }

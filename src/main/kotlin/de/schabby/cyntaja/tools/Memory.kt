@@ -9,7 +9,7 @@ import java.lang.RuntimeException
  */
 fun malloc(type: ValueType, time:Int) : Expression {
     if( time < 1) throw RuntimeException("parameter 'time' can not be less than 1 (it is $time)")
-    val malloc = FunctionCall("malloc")
+    val malloc = FunctionCallLibrary("malloc")
     if( time >1 ) {
         malloc.parameters.add(BinaryOperator(Sizeof(type), "*", Literal(time.toString())))
     } else {
