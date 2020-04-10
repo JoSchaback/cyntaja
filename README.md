@@ -25,3 +25,5 @@ int32_t main() {
    return 0;
 }
 ```
+
+Run "clean build" to build the SNAPSHOT jar file.

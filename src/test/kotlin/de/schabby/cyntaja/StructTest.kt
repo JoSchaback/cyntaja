@@ -38,15 +38,15 @@ class StructTest {
             }
 
             function("print_date") {
+                var date_ptr = Variable("", book) // just a dummy
                 parameters {
-                    variable("date_ptr", date.asPointer)
+                    date_ptr = variable("date_ptr", date.asPointer)
                 }
                 body {
-                    val datePtr = findVar("date_ptr")
                     functionCall("printf", StringLiteral("%i-%i-%i"),
-                        fieldAccess(datePtr, date.field("year")),
-                        fieldAccess(datePtr, date.field("month")),
-                        fieldAccess(datePtr, date.field("day_in_month")))
+                        fieldAccess(date_ptr, date.field("year")),
+                        fieldAccess(date_ptr, date.field("month")),
+                        fieldAccess(date_ptr, date.field("day_in_month")))
                 }
             }
 

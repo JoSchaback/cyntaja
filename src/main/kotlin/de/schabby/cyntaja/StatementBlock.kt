@@ -2,7 +2,7 @@ package de.schabby.cyntaja
 
 import de.schabby.cyntaja.tools.malloc
 
-class StatementBlock(val parent:VariableContainer) : Writable {
+class StatementBlock(/* val parent:VariableContainer */) : Writable {
     val list = mutableListOf<Statement>()
     override fun writeCode(): String {
         val sb = StringBuilder()
@@ -67,7 +67,7 @@ class StatementBlock(val parent:VariableContainer) : Writable {
     }
 
     fun ifStatement(booleanExp: Expression, block:IfStatment.()->Unit) {
-        val ifStmt = IfStatment(booleanExp, this)
+        val ifStmt = IfStatment(booleanExp/*, this*/)
         ifStmt.apply(block)
         list.add(ifStmt)
     }
@@ -93,7 +93,7 @@ class StatementBlock(val parent:VariableContainer) : Writable {
         return FieldAccess(FieldAccess(VarIdentifier(var1), VarIdentifier(var2)), VarIdentifier(var3))
     }
 
-
+/*
     fun findStruct(name:String) : Struct = parent.findStruct(name)
 
     fun findVar(name:String) : Variable {
@@ -102,7 +102,7 @@ class StatementBlock(val parent:VariableContainer) : Writable {
         }
 
         return parent.findVar(name)
-    }
+    }*/
 
     /**
      * Declares a pointer variable to a new memory space of a Struct on the heap.

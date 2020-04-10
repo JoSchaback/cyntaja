@@ -21,4 +21,9 @@ fun malloc(type: ValueType, time:Int) : Expression {
 
 fun malloc(type: ValueType) : Expression  = malloc(type, 1)
 
+fun malloc(type: ValueType, time:Expression) : Expression {
+    val malloc = FunctionCallLibrary("malloc")
+    malloc.parameters.add(BinaryOperator(Sizeof(type), "*", time))
+    return Casting(type.asPointer, malloc)
+}
 

@@ -2,9 +2,8 @@ package de.schabby.cyntaja
 
 import de.schabby.cyntaja.Type.Companion.void
 
-class Function(var name:String, val program: Program) : Writable,
-    VariableContainer {
-
+class Function(var name:String, val program: Program) : Writable /*, VariableContainer */ {
+/*
     override fun findStruct(name: String): Struct = program.findStruct(name)
 
     override fun findVar(name: String): Variable {
@@ -13,14 +12,17 @@ class Function(var name:String, val program: Program) : Writable,
         }
 
         throw RuntimeException("could not find variable with name $name")
-    }
+    } */
 
     val parameters = FunctionParameters()
     var returnType : Type = void
-    val body = StatementBlock(this)
+    val body = StatementBlock(/*this*/)
+    var inline = false // add inline to signature
 
     override fun writeCode(): String {
         val sb = StringBuilder()
+        if( inline )
+            sb.append("inline ")
         sb.append(returnType.name)
         sb.append(" ")
         sb.append(name)
@@ -42,6 +44,8 @@ class Function(var name:String, val program: Program) : Writable,
 
     fun writeDeclaration(): String {
         val sb = StringBuilder()
+        /* if( inline )
+            sb.append("inline ") */
         sb.append(returnType.name)
         sb.append(" ")
         sb.append(name)

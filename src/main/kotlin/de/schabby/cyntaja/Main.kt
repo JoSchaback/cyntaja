@@ -15,9 +15,11 @@ fun main(args: Array<String>) {
             field("great", i32)
         }
 
+        var iParam = Variable("", book) // just a dummy
+
         val helloWorld = function("helloWorld") {
             parameters {
-                variable("i", i32)
+                iParam = variable("i", i32)
                 variable("j", i32.asPointer)
             }
             body {
@@ -26,7 +28,7 @@ fun main(args: Array<String>) {
                 functionCall("printf", StringLiteral("compute this %d\\n"),
                     BinaryOperator(Literal("12"), "+", Literal("13"))
                 )
-                assignment(VarIdentifier(findVar("i")),
+                assignment(VarIdentifier(iParam!!),
                     BinaryOperator(Literal("12"), "+", Literal("13"))
                 )
                 variableDeclaration(i32, "otherVar", Literal("0"))

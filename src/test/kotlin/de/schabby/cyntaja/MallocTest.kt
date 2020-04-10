@@ -20,8 +20,8 @@ class MallocTest {
             function("main") {
                 returnType = i32
                 body {
-                    variableDeclaration(i32.asPointer, "intPtr", malloc(i32, 100))
-                    functionCall("printf", StringLiteral("address %p\\n"), VarIdentifier(findVar("intPtr")))
+                    val intPtr = variableDeclaration(i32.asPointer, "intPtr", malloc(i32, 100))
+                    functionCall("printf", StringLiteral("address %p\\n"), VarIdentifier(intPtr))
                     returnStatement(Literal("0"))
                 }
             }

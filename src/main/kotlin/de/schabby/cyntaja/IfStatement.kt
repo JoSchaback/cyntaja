@@ -1,9 +1,9 @@
 package de.schabby.cyntaja
 
-class IfStatment(val booleanExp: Expression, val parent:StatementBlock) : Statement, VariableContainer {
+class IfStatment(val booleanExp: Expression/*, val parent:StatementBlock */) : Statement/*, VariableContainer */ {
 
-    var thenBlock = StatementBlock(this)
-    var elseBlock = StatementBlock(this)
+    var thenBlock = StatementBlock(/* this */)
+    var elseBlock = StatementBlock(/* this */)
 
     override fun writeCode(): String {
         val sb = StringBuilder()
@@ -29,10 +29,10 @@ class IfStatment(val booleanExp: Expression, val parent:StatementBlock) : Statem
         elseBlock.apply(block)
     }
 
-
+/*
     override fun findStruct(name: String): Struct = parent.findStruct(name)
 
     override fun findVar(name: String): Variable = parent.findVar(name)
-
+*/
 
 }
