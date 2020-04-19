@@ -20,7 +20,11 @@ class Program(var importStd:Boolean = false) {
         includes.forEach {
             pwd.println(it.writeCode())
         }
-        pwd.println("// ====[ Structs ]====")
+        pwd.println("// ====[ Struct typedefs ]====")
+        structs.forEach {
+            pwd.println("typedef struct ${it.name} ${it.name};")
+        }
+        pwd.println("// ====[ Struct definitions ]====")
         structs.forEach {
             pwd.println(it.writeCode())
         }
@@ -34,11 +38,11 @@ class Program(var importStd:Boolean = false) {
         globalVars.forEach { pwd.println(it.writeDeclaration()+";") }
 
         pwd.println("// ====[ Global Arrays ]====")
-        globalArrays.forEach {
+        globalArrays.filter { it.assignmentExp != EmptyExpression }.forEach {
             pwd.println(it.writeCode()+";")
         }
         pwd.println("// ====[ Global Vars ]====")
-        globalVars.forEach {
+        globalVars.filter {it.assignmentExp != EmptyExpression }.forEach {
             pwd.println(it.writeCode()+";")
         }
         pwd.println("// ====[ Functions ]====")
@@ -49,6 +53,20 @@ class Program(var importStd:Boolean = false) {
         pwd.close()
 
     }
+/*
+    data class StructDependency(val struct:Struct, val dependsOn:MutableSet<StructDependency>)
+
+    private fun buildStructDepencencyGraph() : Set<StructDependency> {
+        val roots = mutableSetOf<StructDependency>()
+
+        structs
+            .filter { s -> s.fields.filter { f -> f.type !is ValueType }.isEmpty() }
+            .forEach { s -> s
+                roots.add( StructDependency(s, mutableSetOf()) )
+            }
+
+        return roots
+    } */
 
     fun function(name:String, block: Function.()->Unit) : Function {
         val f = Function(name, this)

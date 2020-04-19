@@ -8,14 +8,16 @@ class Struct(name:String) : Writable, ValueType(name) {
 
     override fun writeCode(): String {
         val sb = StringBuilder()
-        sb.append("typedef struct {\n")
+        sb.append("struct $name {\n")
         fields.forEach {
             sb.append("   ")
             sb.append(it.type.name+" "+it.name+";\n")
         }
-        sb.append("} $name;")
+        sb.append("};")
         return sb.toString()
     }
+
+    fun getFieldByVarName(varName:String) = fields.find {it.name==varName}!!
 
     /**
      * Adds a new field to this Struct.

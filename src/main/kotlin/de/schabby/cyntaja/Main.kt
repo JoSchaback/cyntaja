@@ -28,7 +28,7 @@ fun main(args: Array<String>) {
                 functionCall("printf", StringLiteral("compute this %d\\n"),
                     BinaryOperator(Literal("12"), "+", Literal("13"))
                 )
-                assignment(VarIdentifier(iParam!!),
+                assignment(VarIdentifier(iParam),
                     BinaryOperator(Literal("12"), "+", Literal("13"))
                 )
                 variableDeclaration(i32, "otherVar", Literal("0"))
