@@ -1,6 +1,7 @@
 package de.schabby.cyntaja
 
-import java.lang.RuntimeException
+
+import kotlin.RuntimeException
 
 class Struct(name:String) : Writable, ValueType(name) {
 
@@ -11,13 +12,22 @@ class Struct(name:String) : Writable, ValueType(name) {
         sb.append("struct $name {\n")
         fields.forEach {
             sb.append("   ")
-            sb.append(it.type.name+" "+it.name+";\n")
+            if( it.type is FunctionPointer ) {
+                val fp = it.type as FunctionPointer
+                fp.name = it.name
+                sb.append(fp.writeFunctionPointer()+";\n")
+            }
+            else sb.append(it.type.name+" "+it.name+";\n")
         }
         sb.append("};")
         return sb.toString()
     }
 
-    fun getFieldByVarName(varName:String) = fields.find {it.name==varName}!!
+    fun getFieldByVarName(varName:String) : Variable {
+        val rslt = fields.find {it.name==varName}
+        if( rslt == null ) throw RuntimeException("could not find field with name $varName in struct $name")
+        return rslt
+    }
 
     /**
      * Adds a new field to this Struct.

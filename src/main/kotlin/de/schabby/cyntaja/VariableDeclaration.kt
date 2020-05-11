@@ -5,11 +5,22 @@ class VariableDeclaration(varType:Type,varName:String, var assignmentExp: Expres
     val variable = Variable(varName, varType, const)
 
     override fun writeCode() :String {
-        var s = writeConst() + variable.type.name + " "+variable.name
-                if ( !assignmentExp.equals(EmptyExpression) ) {
-            s += " = " + assignmentExp.writeCode()
+        if( variable.type is FunctionPointer ) {
+            val fp = variable.type as FunctionPointer
+            fp.name = variable.name
+            var s = fp.writeFunctionPointer()
+            if (!assignmentExp.equals(EmptyExpression)) {
+                s += " = " + assignmentExp.writeCode()
+            }
+            return s
         }
-        return s
+        else {
+            var s = writeConst() + variable.type.name + " " + variable.name
+            if (!assignmentExp.equals(EmptyExpression)) {
+                s += " = " + assignmentExp.writeCode()
+            }
+            return s
+        }
     }
 
     fun writeDeclaration(): String {

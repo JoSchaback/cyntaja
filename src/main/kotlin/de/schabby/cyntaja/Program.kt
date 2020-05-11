@@ -20,6 +20,9 @@ class Program(var importStd:Boolean = false) {
         includes.forEach {
             pwd.println(it.writeCode())
         }
+
+        pwd.println("typedef void (* genericFP)(void);")
+
         pwd.println("// ====[ Struct typedefs ]====")
         structs.forEach {
             pwd.println("typedef struct ${it.name} ${it.name};")

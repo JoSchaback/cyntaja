@@ -21,8 +21,6 @@ class FunctionCall(val function:Function) : Statement, Expression {
 
         return sb.toString()
     }
-
-
 }
 
 class FunctionCallLibrary(val funcName:String) : Statement, Expression {
